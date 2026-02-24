@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next"
 import { Inter, DM_Serif_Display } from "next/font/google"
+import Script from "next/script"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
@@ -104,12 +105,25 @@ export default function RootLayout({
           name="google-site-verification"
           content="gz2TcKOm0nw62LjNXE7Rm9LF3iQCBPMMnU5Xk1P3SLc"
         />
+      </head>
+      <body className={`${inter.variable} ${dmSerif.variable} font-sans antialiased`}>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-17969627647"
+          strategy="afterInteractive"
+        />
+        <Script id="google-ads-gtag" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'AW-17969627647');
+          `}
+        </Script>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-      </head>
-      <body className={`${inter.variable} ${dmSerif.variable} font-sans antialiased`}>
         {children}
         <Analytics />
       </body>
